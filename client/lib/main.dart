@@ -1,3 +1,4 @@
+import 'package:client/src/widgets/responsive_button.dart';
 import 'package:flutter/material.dart';
 import 'package:client/src/models/todo.dart';
 import 'package:client/src/widgets/todo_item_widget.dart';
@@ -7,12 +8,13 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -44,15 +46,20 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: const Text("Hello"),
-        ),
-        body: ListView.builder(
-          itemCount: todoList.length,
-          itemBuilder: (BuildContext context, int index) {
-            return TodoItem(todoList[index]);
-          },
-        ));
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: const Text('Todo List'),
+      ),
+      body: ListView.builder(
+        itemCount: todoList.length,
+        itemBuilder: (BuildContext context, int index) {
+          return TodoItem(todoList[index]);
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.add),
+      ),
+    );
   }
 }
