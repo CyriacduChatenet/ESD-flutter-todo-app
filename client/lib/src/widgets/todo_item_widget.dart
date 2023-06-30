@@ -19,7 +19,7 @@ class TodoItem extends StatelessWidget {
         children: <Widget>[
           ResponsiveButton(icon: const Icon(Icons.edit), onPressed: () {}, text: 'Edit'),
           const SizedBox(width: 12),
-                    ResponsiveButton(icon: const Icon(Icons.delete), onPressed: () {}, text: 'Delete'),
+          ResponsiveButton(icon: const Icon(Icons.delete), onPressed: () {}, text: 'Delete'),
         ],
       ),
       onTap: () async {

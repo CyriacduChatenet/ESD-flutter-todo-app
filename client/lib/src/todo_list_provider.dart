@@ -22,4 +22,9 @@ class TodoListProvider extends ChangeNotifier {
     _todoList.add(todo);
     notifyListeners();
   }
+
+  void deleteTodoById(String id) {
+    _todoList.removeWhere((todo) => todo.id == id);
+    notifyListeners();
+  }
 }
