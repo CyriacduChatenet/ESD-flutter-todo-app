@@ -1,7 +1,9 @@
-import 'package:client/src/widgets/responsive_button.dart';
+import 'package:client/src/todo_list_provider.dart';
+import 'package:client/src/widgets/todo_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:client/src/models/todo.dart';
 import 'package:client/src/widgets/todo_item_widget.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +22,10 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: Provider(
+        create: (_) => TodoListProvider(),
+        child: const MyHomePage(title: 'Flutter Demo Home Page'),
+      ),
     );
   }
 }
@@ -29,19 +34,6 @@ class MyHomePage extends StatelessWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
   final String title;
 
-  static final List<Todo> todoList = [
-    Todo(
-      id: "1",
-      title: "test todo",
-      state: TodoState.inProgress,
-    ),
-    Todo(
-      id: "2",
-      title: "test todo 2",
-      description: "test description",
-      state: TodoState.done,
-    ),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -50,14 +42,16 @@ class MyHomePage extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Todo List'),
       ),
-      body: ListView.builder(
-        itemCount: todoList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return TodoItem(todoList[index]);
-        },
-      ),
+      body: const TodoListWidget(),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          context.read<TodoListProvider>().createTodo(Todo(
+            id: context.read<TodoListProvider>().todoList.length.toString(),
+            title: "test todo 3",
+            description: "test description 3",
+            state: TodoState.inProgress,
+          ));
+        },
         child: const Icon(Icons.add),
       ),
     );
