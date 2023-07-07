@@ -23,6 +23,12 @@ class TodoListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void updateTodoById(String id, Todo todo) {
+    final index = _todoList.indexWhere((todo) => todo.id == id);
+    _todoList[index] = todo;
+    notifyListeners();
+  }
+
   void deleteTodoById(String id) {
     _todoList.removeWhere((todo) => todo.id == id);
     notifyListeners();

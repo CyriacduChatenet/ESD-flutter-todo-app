@@ -13,10 +13,10 @@ class Todo {
   });
 
   final String id;
-  final String title;
-  final String? description;
+  late final String title;
+  late final String? description;
 
-  final TodoState state;
+  late final TodoState state;
 
   @override
   String toString() {
